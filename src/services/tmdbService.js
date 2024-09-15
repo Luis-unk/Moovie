@@ -1,18 +1,26 @@
 import axios from "axios";
+import {API_KEY} from "@env"
 
-const TMDBUrl = axios.create({
-    baseURL: "https://api.themoviedb.org/3/movie/157336?",
-    searchURL: "https://api.themoviedb.org/3/search/movie?query"
+const movieUrl = axios.create({
+    baseURL: "https://api.themoviedb.org/3/movie/",    
 })
 
-export const fetchFilms = async () => {
-    response = await axios.get(`https://api.themoviedb.org/3/movie/157336?api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83`)
+const searchUrl = axios.create({
+    baseURL: "https://api.themoviedb.org/3/search/movie?query=",   
+})
 
-    return response.data;
+const imageUrl = axios.create({
+    baseURL: "https://image.tmdb.org/t/p/w500/", 
+})
+
+export const fetchFilmsTest = async () => {
+    const res = await movieUrl.get()
+    console.log(res.data)
+    return res.data
 }
 
 export const fetchFilmsById = async (movieId) => {
-    response = await axios.get(`${TMDBUrl}/${movieId}?api_key=${process.env.API_KEY}`)
+    response = await axios.get()
 
     return response.data;
 }
@@ -20,7 +28,7 @@ export const fetchFilmsById = async (movieId) => {
 export const fetchIdByTitle = async (title) => {
     title = title.replace(/ /g, "+")
 
-    response = await axios.get(`${searchURL}=${title}&${process.env.API_KEY}`)
+    response = await axios.get(`=${title}&${API_KEY}`)
 
     return response.data.id;
 }

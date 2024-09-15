@@ -1,29 +1,15 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 LinearGradient;
-import tmdb from "../../services/tmdbService";
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 
 export default function HomeScreen({ navigation }) {
-  const [filme, setFilme] = useState([]);
+  const [movie, setMovie] = useState([]);
 
-  useEffect(() => {
-    const fetchFilm = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.themoviedb.org/3/movie/157336?api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83"
-        );
-        setFilme(response.data.results);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
-    fetchFilm();
-  }, []);
+
   return (
     <View>
       <View style={styles.carouselContainer}></View>
