@@ -2,6 +2,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
+import FavoriteScreen from "../screens/FavoriteScreen.js/FavoriteScreen";
 
 export default function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -11,6 +12,7 @@ export default function DrawerNavigator() {
       <Drawer.Navigator
         initialRouteName="Home"
         screenOptions={{
+          headerTitle: "+Moovie",
           headerStyle: {
             backgroundColor: "#5D3CF0",
           },
@@ -18,7 +20,8 @@ export default function DrawerNavigator() {
           headerTintColor: "white",
         }}
       >
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Início" component={HomeScreen} />
+        <Drawer.Screen name="Favoritos" component={FavoriteScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
