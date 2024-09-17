@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_KEY} from "@env"
+
 
 const movieUrl = axios.create({
     baseURL: "https://api.themoviedb.org/3/movie/",    

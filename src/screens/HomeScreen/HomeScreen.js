@@ -1,11 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView } from "react-native";
 LinearGradient;
 import { useState, useEffect } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { ScrollView } from "react-native-web";
 import CardMovie from "../../components/CardMovie/CardMovie";
+
 
 
 export default function HomeScreen({ navigation }) {
@@ -24,10 +24,10 @@ export default function HomeScreen({ navigation }) {
   }, [])
 
   return (
-    <LinearGradient 
-            colors={["#292626", "#1D1C1C"]} style={styles.backgroundMoovie}>               
-    <View>
-      <ScrollView>
+    <ScrollView>   
+    <View style={styles.backgroundMoovie}>
+      <LinearGradient 
+            colors={["#292626", "#1D1C1C"]} style={styles.backgroundMoovie}>   
       <View style={styles.carouselContainer}>
         <Image 
         source={require("../../../assets/moovieBanner.png")}
@@ -36,26 +36,22 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.searchContainer}>
         <View style={styles.searchButtonBox}>
           <TouchableOpacity style={styles.buttonSearch}>
-            <TextInput style={styles.textSearch}
-            placeholder="Buscar..."/>
+            <TextInput
+            placeholder="Buscar..."
+            style={styles.textSearch}/>
           <AntDesign name="search1" size={18} color="white" />
         </TouchableOpacity></View>
         
       </View>
       <View style={styles.contentContainer}>
-      {movies && movies.map((m)=>(
-          <View key={m.id}>
-          <Text style={styles.textSearch}>{m.title}</Text>
-          </View>
+      {movies && movies.map((movie)=>(        
+          <CardMovie key={movie.id} movie={movie}/>
         ))}
       </View>
-      <View style={styles.footerStyle}>
-        <Text>Test 2</Text>
-      </View>
-      </ScrollView>
+      </LinearGradient>
     </View>
+    </ScrollView>
     
-    </LinearGradient>
   );
 }
 
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   carouselContainer: {
-    height: "25vh",
+    height: 200,
     backgroundColor: "#dddd",
     margin: 20,
     borderRadius: 6,
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     display: "flex",
     justifyContent: "center",
-    height: "8vh",
+    height: 70,
     alignItems: "center",
     backgroundColor: "#313131"
   },
@@ -93,7 +89,6 @@ const styles = StyleSheet.create({
     width: "80%",
     border: 6,
     textAlign: "center",
-    borderBottomWidth: "80%",
   },
   buttonSearch:{
     display: "flex",
@@ -104,12 +99,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   textSearch: {
-    color: "white"
+    color: "white",
   },
   contentContainer: {
-    height: "20dvh",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    height: "120dvh"
+    
   },
   footerStyle: {
-    height: "20dvh"
+    height: "8vh",
+    backgroundColor: "blue"
   },
 });
