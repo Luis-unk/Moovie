@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, StyleSheet,Image } from "react-native";
 
 const imageUrl = "https://image.tmdb.org/t/p/w500/"
 
@@ -15,8 +15,10 @@ export default function CardMovie({movie}) {
 
 const styles = StyleSheet.create({
     card: {
-      height: "20dvh",
-      width: "12dvh",
+      flexDirection: "column",
+      padding: 5,
+      height: "20vh",
+      width: "16vh",
       margin: 20
     },
     imageCard: {
@@ -26,7 +28,9 @@ const styles = StyleSheet.create({
       resizeMode: "cover"
     },
     textCard: {
-        fontSize: 12,
-        color: "white"
+        marginTop: 6,
+        fontSize: 14,
+        color: "white",
+        textAlign: "center"
     }
 })
