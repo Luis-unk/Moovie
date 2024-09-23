@@ -1,25 +1,55 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView, FlatList } from "react-native";
 LinearGradient;
 import { useState, useEffect } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import CardMovie from "../../components/CardMovie/CardMovie";
 
 
-
 export default function HomeScreen({ navigation }) {
-  const [movies, setMovies] = useState([]);
+  const [ratedMovies, setRatedMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [queryMovie, setQueryMovie] = useState("");
 
   const getTopRated = async ()=>{
-    const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
     const data = await res.json()
 
-    setMovies(data.results)
+    setRatedMovies(data.results)
+  }
+
+  const getPopularMovies = async ()=>{
+    const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const data = await res.json()
+
+    setPopularMovies(data.results)
+  }
+
+  const getNowPlayingMovies = async ()=>{
+    const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const data = await res.json()
+
+    setNowPlayingMovies(data.results)
+  }
+
+  const getUpcomingMovies = async ()=>{
+    const res = await fetch('https://api.themoviedb.org/3/movie/upcoming?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const data = await res.json()
+
+    setUpcomingMovies(data.results)
+  }
+  const searchMovies = async ()=>{
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${queryMovie}&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83`)
   }
 
   useEffect(()=>{
     getTopRated()
+    getPopularMovies()
+    getNowPlayingMovies()
+    getUpcomingMovies()
   }, [])
 
   return (
@@ -38,15 +68,15 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.optionsMoovie}>
 
-          <TouchableOpacity >
+          <TouchableOpacity>
             <Text style={styles.textOptions}>+Moovie</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {navigation.navigate("Favoritos")}}>
             <Text style={styles.textOptions}>Favoritos</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> {navigation.navigate("Pesquisar")}}>
             <Text style={styles.textOptions}>Pesquisar</Text>
           </TouchableOpacity>
 
@@ -62,11 +92,55 @@ export default function HomeScreen({ navigation }) {
         </View>
         
         <View style={styles.contentBox}>
-        <Text style={styles.categoryText}>Mais bem avaliados</Text>
           <View style={styles.contentContainer}>
-              {movies && movies.map((movie) => (
-                  <CardMovie key={movie.id} movie={movie} />
-              ))}
+            <Text style={styles.categoryText}>Mais bem avaliados</Text>
+              <FlatList
+              data={ratedMovies}
+              horizontal={true}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item} navigation={navigation}/></View>)}
+              keyExtractor={item => item.id}
+              getItemLayout={(data, index) => (
+                { length: 300, offset: 310 * index, index }
+              )}
+              showsHorizontalScrollIndicator={false}
+              />
+            <Text style={styles.categoryText}>Populares</Text>
+              <FlatList
+              data={popularMovies}
+              horizontal={true}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              keyExtractor={item => item.id}
+              getItemLayout={(data, index) => (
+                { length: 300, offset: 310 * index, index }
+              )}
+              showsHorizontalScrollIndicator={false}
+              style={styles.carrouselStyle}/>
+
+              <Text style={styles.categoryText}>Assista Agora</Text>
+              <FlatList
+              data={nowPlayingMovies}
+              horizontal={true}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              keyExtractor={item => item.id}
+              getItemLayout={(data, index) => (
+                { length: 300, offset: 310 * index, index }
+              )}
+              showsHorizontalScrollIndicator={false}
+              style={styles.carrouselStyle}/>
+
+              <Text style={styles.categoryText}>Por Vir</Text>
+              <FlatList
+              data={upcomingMovies}
+              horizontal={true}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              keyExtractor={item => item.id}
+              getItemLayout={(data, index) => (
+                { length: 300, offset: 310 * index, index }
+              )}
+              showsHorizontalScrollIndicator={false}
+              style={styles.carrouselStyle}/>
+
+
           </View>
         </View>
 
@@ -131,13 +205,16 @@ const styles = StyleSheet.create({
   contentBox: {
     flexDirection: "column",
     margin: 5,
-    padding: 10
+    padding: 10,
   },
   contentContainer: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    height: "120dvh"
+    height: "auto",
+    width: "100%"
+  },
+  carrouselStyle: {
+    height: "auto",
+    marginTop: 5
   },
   contentList: {
     height: 80
@@ -145,7 +222,7 @@ const styles = StyleSheet.create({
   categoryText: {
     color: "white",
     fontSize: 18,
-    margin: 2
+    margin: 10,
   },
   footerStyle: {
     height: "8vh",
