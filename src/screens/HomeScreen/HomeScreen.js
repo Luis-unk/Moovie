@@ -3,7 +3,6 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView, FlatList } from "react-native";
 LinearGradient;
 import { useState, useEffect } from "react";
-import AntDesign from '@expo/vector-icons/AntDesign';
 import CardMovie from "../../components/CardMovie/CardMovie";
 
 
@@ -41,9 +40,6 @@ export default function HomeScreen({ navigation }) {
 
     setUpcomingMovies(data.results)
   }
-  const searchMovies = async ()=>{
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${queryMovie}&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83`)
-  }
 
   useEffect(()=>{
     getTopRated()
@@ -72,74 +68,58 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.textOptions}>+Moovie</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => {navigation.navigate("Favoritos")}}>
-            <Text style={styles.textOptions}>Favoritos</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={()=> {navigation.navigate("Pesquisar")}}>
             <Text style={styles.textOptions}>Pesquisar</Text>
           </TouchableOpacity>
 
         </View>
-
-        <View style={styles.searchButtonBox}>
-          <TouchableOpacity style={styles.buttonSearch}>
-            <TextInput
-            placeholder="Buscar..."
-            style={styles.textSearch}/>
-            <AntDesign name="search1" size={18} color="white" />
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.contentBox}>
           <View style={styles.contentContainer}>
+            
+          <View style={styles.flatTittle}>
             <Text style={styles.categoryText}>Mais bem avaliados</Text>
               <FlatList
               data={ratedMovies}
               horizontal={true}
               renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item} navigation={navigation}/></View>)}
               keyExtractor={item => item.id}
-              getItemLayout={(data, index) => (
-                { length: 300, offset: 310 * index, index }
-              )}
               showsHorizontalScrollIndicator={false}
               />
+          </View>
+
+          <View style={styles.flatTittle}>
             <Text style={styles.categoryText}>Populares</Text>
               <FlatList
               data={popularMovies}
               horizontal={true}
-              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item} navigation={navigation}/></View>)}
               keyExtractor={item => item.id}
-              getItemLayout={(data, index) => (
-                { length: 300, offset: 310 * index, index }
-              )}
               showsHorizontalScrollIndicator={false}
               style={styles.carrouselStyle}/>
+          </View>
 
+          <View style={styles.flatTittle}>
               <Text style={styles.categoryText}>Assista Agora</Text>
               <FlatList
               data={nowPlayingMovies}
               horizontal={true}
-              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item} navigation={navigation}/></View>)}
               keyExtractor={item => item.id}
-              getItemLayout={(data, index) => (
-                { length: 300, offset: 310 * index, index }
-              )}
               showsHorizontalScrollIndicator={false}
               style={styles.carrouselStyle}/>
+          </View>  
 
+          <View style={styles.flatTittle}>
               <Text style={styles.categoryText}>Por Vir</Text>
               <FlatList
               data={upcomingMovies}
               horizontal={true}
-              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item}/></View>)}
+              renderItem={({item}) =>  (<View><CardMovie key={item.id}  movie={item} navigation={navigation}/></View>)}
               keyExtractor={item => item.id}
-              getItemLayout={(data, index) => (
-                { length: 300, offset: 310 * index, index }
-              )}
               showsHorizontalScrollIndicator={false}
               style={styles.carrouselStyle}/>
-
+          </View>
 
           </View>
         </View>
@@ -174,33 +154,20 @@ const styles = StyleSheet.create({
   },
   optionsMoovie: {
     flexDirection: "row",
+    padding: 10,
     justifyContent: "space-evenly",
-    height: 40,
-    alignItems: "center"
+    height: 50,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderBottomColor: "white",
+    borderTopColor: "white"
   },
   textOptions: {
     fontSize: 16,
     fontWeight: "350",
     color: "white",
     padding: 5
-  },
-  searchButtonBox: {
-    alignItems: "center",
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    backgroundColor: "#313131",
-    shadowRadius: 10
-  },
-  buttonSearch:{
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    height: 30
-
-  },
-  textSearch: {
-    color: "white",
   },
   contentBox: {
     flexDirection: "column",
@@ -214,18 +181,23 @@ const styles = StyleSheet.create({
   },
   carrouselStyle: {
     height: "auto",
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 5
   },
   contentList: {
     height: 80
   },
   categoryText: {
-    color: "white",
-    fontSize: 18,
-    margin: 10,
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   footerStyle: {
     height: "8vh",
     backgroundColor: "blue"
   },
+  flatTittle: {
+    margin: 10
+  }
 });
