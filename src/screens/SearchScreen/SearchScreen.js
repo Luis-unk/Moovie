@@ -4,10 +4,10 @@ import CardMovie from '../../components/CardMovie/CardMovie';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from "@expo/vector-icons"; // Importando os ícones do Expo
 LinearGradient;
+import { API_KEY } from "@env"
 
 // n esquecer de botar chave da api aqui
 const API_URL = 'https://api.themoviedb.org/3/search/movie';
-const API_KEY = '8fc5c85730d3b70ddeb9a3d47b0e5c83';
 
 
 export default function MovieSearch({navigation}) {

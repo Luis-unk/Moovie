@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
+import { API_KEY } from "@env"
 
 const imageUrl = "https://image.tmdb.org/t/p/w500/";
 
 export default function MovieScreen({ route, navigation }) {
     const [movieDetails, setMovieDetails] = useState(null);
     const movieId = route.params.id; // ID do filme passado como parâmetro
-    const apiKey = "8fc5c85730d3b70ddeb9a3d47b0e5c83"; // Sua chave da API
 
     const fetchMovieDetails = async (id) => {
         try {
             const response = await fetch(
-                `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=credits`
+                `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR&append_to_response=credits`
             );
             const data = await response.json();
             setMovieDetails(data);

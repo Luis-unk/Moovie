@@ -1,9 +1,10 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView, FlatList } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, FlatList } from "react-native";
 LinearGradient;
 import { useState, useEffect } from "react";
 import CardMovie from "../../components/CardMovie/CardMovie";
+import { API_KEY } from "@env"
 
 
 export default function HomeScreen({ navigation }) {
@@ -11,31 +12,30 @@ export default function HomeScreen({ navigation }) {
   const [popularMovies, setPopularMovies] = useState([]);
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [queryMovie, setQueryMovie] = useState("");
 
   const getTopRated = async ()=>{
-    const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&api_key=${API_KEY}`)  
     const data = await res.json()
 
     setRatedMovies(data.results)
   }
 
   const getPopularMovies = async ()=>{
-    const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const res = await fetch(`https://api.themoviedb.org/3/movie/popular?language=pt-BR&api_key=${API_KEY}`)  
     const data = await res.json()
 
     setPopularMovies(data.results)
   }
 
   const getNowPlayingMovies = async ()=>{
-    const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const res = await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=pt-BR&api_key=${API_KEY}`)  
     const data = await res.json()
 
     setNowPlayingMovies(data.results)
   }
 
   const getUpcomingMovies = async ()=>{
-    const res = await fetch('https://api.themoviedb.org/3/movie/upcoming?language=pt-BR&api_key=8fc5c85730d3b70ddeb9a3d47b0e5c83')  
+    const res = await fetch(`https://api.themoviedb.org/3/movie/upcoming?language=pt-BR&api_key=${API_KEY}`)  
     const data = await res.json()
 
     setUpcomingMovies(data.results)

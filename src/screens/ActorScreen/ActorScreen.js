@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { API_KEY } from "@env"
 
-const apiKey = "8fc5c85730d3b70ddeb9a3d47b0e5c83";
 const imageUrl = "https://image.tmdb.org/t/p/w500";
 
 export default function ActorScreen({ route }) {
@@ -12,7 +12,7 @@ export default function ActorScreen({ route }) {
     const fetchActorDetails = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/person/${actorId}?api_key=${apiKey}&language=pt-BR`
+          `https://api.themoviedb.org/3/person/${actorId}?api_key=${API_KEY}&language=pt-BR`
         );
         const data = await response.json();
         setActorDetails(data);
