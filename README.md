@@ -41,7 +41,7 @@ O +Movie é um projeto que permite aos usuários pesquisar e visualizar informa�
    ```bash
    git clone https://github.com/seu-usuario/movie-app.git
    cd movie-app
-  
+   ```
 
 2. **Instale as dependências**
 
@@ -49,7 +49,7 @@ O +Movie é um projeto que permite aos usuários pesquisar e visualizar informa�
   yarn install
   ```
 
-  ou
+ou
   
   ```bash
   npm install
@@ -92,14 +92,21 @@ Você pode usar o Expo Go no seu dispositivo móvel para escanear o QR code ou r
    ```
 
 ## Contribuição 
+
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
 Faça um fork do repositório
+
 Crie uma nova branch (git checkout -b minha-feature)
+
 Faça suas alterações e commit (git commit -m 'Adicionei uma nova feature')
+
 Envie para o branch original (git push origin minha-feature)
+
 Abra um Pull Request
+
 Licença
+
 Esse projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
 
 ## Contato
