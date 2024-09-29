@@ -1,10 +1,17 @@
-# +Movie
+# +Moovie
 
 Um aplicativo de filmes construído com React Native, que utiliza a API do TMDB (The Movie Database) para exibir informações sobre filmes, séries e muito mais.
 
 ## Descrição
 
 O +Movie é um projeto que permite aos usuários pesquisar e visualizar informações detalhadas sobre filmes e séries. Com uma interface intuitiva e responsiva, o aplicativo oferece uma experiência de navegação fluida, apresentando resenhas, trailers e detalhes sobre os filmes.
+
+## Telas
+
+| ![Tela Inicio](assets/menuMoovie.png) | ![Filme](assets/filmeMoovie.png) |
+|:-------------------------------------:|:-------------------------------------:|
+| Tela Inicio                              | Filme                             |
+
 
 ## Funcionalidades
 
@@ -59,29 +66,30 @@ import API_KEY from "@env"
 
 4. Inicie o aplicativo
 
-```bash
-# usando o yarn
-yarn start
-```
+   ```bash
+   # usando o yarn
+   yarn start
+   ```
 
-```bash
-# usando npm
-npm start
-```
+   ```bash
+   # usando npm
+   npm start
+   ```
 
 Você pode usar o Expo Go no seu dispositivo móvel para escanear o QR code ou rodar no simulador.
 
-Estrutura do Projeto
-bash
-Copiar código
-movie-app/
-├── src/
-│   ├── components/       # Componentes reutilizáveis
-│   ├── navigation/       # Configuração de rotas
-│   ├── screens/          # Telas do aplicativo
-│   ├── service/          # Configuraçôes da api
-├── App.js                # Ponto de entrada do aplicativo
-└── package.json          # Dependências e scripts
+## Estrutura do Projeto
+
+   ```bash
+   movie-app/
+   ├── src/
+   │   ├── components/       # Componentes reutilizáveis
+   │   ├── navigation/       # Configuração de rotas
+   │   ├── screens/          # Telas do aplicativo
+   │   ├── service/          # Configuraçôes da api
+   ├── App.js                # Ponto de entrada do aplicativo
+   └── package.json          # Dependências e scripts
+   ```
 
 ## Contribuição 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
@@ -95,7 +103,11 @@ Licença
 Esse projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
 
 ## Contato
+
 Para mais informações, entre em contato conosco:
 
 Luis: santosluiss2022@gmail.com
-Luis-unk
+GitHub: Luis-unk
+
+Lucas Bomfim: lucas.bomfim144@gmail.com
+GitHub: Lucas.bomfim
