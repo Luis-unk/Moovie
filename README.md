@@ -105,9 +105,6 @@ Envie para o branch original (git push origin minha-feature)
 
 Abra um Pull Request
 
-Licença
-
-Esse projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
 
 ## Contato
 
