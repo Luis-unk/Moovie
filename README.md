@@ -32,7 +32,7 @@ O +Movie é um projeto que permite aos usuários pesquisar e visualizar informa�
 
 - Node.js
 - Yarn ou npm
-- Expo CLI (opcional, mas recomendado)
+- Expo CLI 
 
 ### Passos para instalação
 
